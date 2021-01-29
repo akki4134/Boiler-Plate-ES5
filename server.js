@@ -22,6 +22,4 @@ require("./models/User");
 
 const app = require("./app");
 
-app.listen(8000, () => {
-    console.log("Server listening on port 8000");
-});
+app.listen(process.env.PORT || 5000)
