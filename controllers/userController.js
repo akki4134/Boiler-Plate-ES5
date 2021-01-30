@@ -19,8 +19,8 @@ exports.checkusername = async (req, res) => {
 }
 
 exports.fetchuser = async (req, res) => {
-  const { phonenumber } = req.body;
-  await User.findOne({ phonenumber })
+  const { faid } = req.body;
+  await User.findOne({ faid })
     .then(users => res.json(users))
     .catch(err => res.status(400).json('Error: ' + err));
 }
