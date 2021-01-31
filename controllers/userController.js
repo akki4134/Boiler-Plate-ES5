@@ -27,6 +27,10 @@ exports.fetchuser = async (req, res) => {
 
 exports.register = async (req, res) => {
   const { faid, phonenumber, username } = req.body;
+
+  const userExist = await User.findOne({ username })
+  if (userExist) return res.status(400).send('Username already exists')
+
   const user = new User({
     faid,
     phonenumber,
@@ -37,7 +41,7 @@ exports.register = async (req, res) => {
   });
   await user.save();
   res.json({
-    message: "[" + username + "] is successfully registered with mobile number[" + phonenumber + "]",
+    message: "" + username + " is successfully registered with mobile number" + phonenumber + "",
   });
   //   const token = await jwt.sign({ id: user.id }, process.env.SECRET);
   //   res.json({
