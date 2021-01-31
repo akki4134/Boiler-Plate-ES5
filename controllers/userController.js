@@ -41,7 +41,7 @@ exports.register = async (req, res) => {
   });
   await user.save();
   res.json({
-    message: "" + username + " is successfully registered with mobile number" + phonenumber + "",
+    message: "" + username + " is successfully registered with mobile number " + phonenumber + "",
   });
   //   const token = await jwt.sign({ id: user.id }, process.env.SECRET);
   //   res.json({
