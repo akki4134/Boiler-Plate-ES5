@@ -8,6 +8,9 @@ const io = socketio(server).sockets;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+const { onConnect } = require('./middlewares/socket')
+
 //Setup Error Handlers
 
 // const errorHandlers = require("./handlers/errorHandlers");
@@ -18,8 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 // } else {
 //     app.use(errorHandlers.productionErrors);
 // }
+
+
+
 //middleware
-require("./middlewares/socket")(io);
+io.on('connection', onConnect)
 const userRouter = require('./routes/user')
 
 
