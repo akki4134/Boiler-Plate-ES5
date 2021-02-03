@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
-// const sha256 = require("js-sha256");
-// const jwt = require("jwt-then");
+var jwt = require('jsonwebtoken');
 
 
 
@@ -14,14 +13,14 @@ exports.getallusers = async (req, res) => {
 exports.checkusername = async (req, res) => {
   const { username } = req.body;
   await User.findOne({ username })
-    .then(users => res.json(users))
+    .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err))
 }
 
 exports.fetchuser = async (req, res) => {
   const { faid } = req.body;
   await User.findOne({ faid })
-    .then(users => res.json(users))
+    .then(user => res.json(user))
     .catch(err => res.status(400).json('Error: ' + err));
 }
 
@@ -35,18 +34,15 @@ exports.register = async (req, res) => {
     faid,
     phonenumber,
     username,
+  });
 
-    // email,
-    // password: sha256(password + process.env.SALT),
-  });
   await user.save();
+  const token = jwt.sign({ id: user.id }, process.env.SECRET);
   res.json({
-    message: "" + username + " is successfully registered with mobile number " + phonenumber + "",
-  });
-  //   const token = await jwt.sign({ id: user.id }, process.env.SECRET);
-  //   res.json({
-  //     message: "User logged in successfully!",
-  //     token,
-  //   });
+    message: "User logged in successfully!",
+    token,
+    user: user.id,
+  })
+  res.status(200).send({ auth: true, token: token , user: user.id});
 };
 
