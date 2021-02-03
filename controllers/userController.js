@@ -43,6 +43,4 @@ exports.register = async (req, res) => {
     token,
     user: user.id,
   })
-  res.status(200).send({ auth: true, token: token , user: user.id});
 };
-
