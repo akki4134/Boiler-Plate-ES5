@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
+
 const User = mongoose.model("User");
-var jwt = require('jsonwebtoken');
-
-
 
 exports.getallusers = async (req, res) => {
   await User.find({})
@@ -37,10 +36,10 @@ exports.register = async (req, res) => {
   });
 
   await user.save();
-  //const token = jwt.sign({ id: user.id }, process.env.SECRET);
+  const token = jwt.sign({ id: user.id }, process.env.SECRET);
   res.json({
     message: "User logged in successfully!",
-   // token,
+    token,
     user: user.id,
   })
 };
