@@ -1,15 +1,23 @@
 const express = require("express");
 const app = express();
-const http = require("http");
-const socketio = require("socket.io");
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
-const server = http.createServer(app);
-const io = socketio(server).sockets;
+// io.on('connection', socket => {
+//     socket.emit('request', /* … */); // emit an event to the socket
+//     io.emit('broadcast', /* … */); // emit an event to all connected sockets
+//     socket.on('reply', () => { /* … */ }); // listen to the event
+// });
+
+
+
+io.on('connection', function (socket) {
+    console.log('socket connected')
+})
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const { onConnect } = require('./middlewares/socket')
 
 //Setup Error Handlers
 
@@ -25,7 +33,11 @@ const { onConnect } = require('./middlewares/socket')
 
 
 //middleware
-io.on('connection', onConnect)
+
+// require("./middlewares/socket")(io);
+
+
+
 const userRouter = require('./routes/user')
 
 

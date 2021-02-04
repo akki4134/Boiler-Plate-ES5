@@ -1,12 +1,10 @@
-exports.onConnect = socket => {
 
-    console.log("socket connected");
-
-
-    socket.on("chat message", msg => {
-        console.log(msg);
-        io.emit("chat message", msg);
-    })
-
-    
+module.exports = (io) => {
+    io.on("connection", socket => {
+        console.log("socket connected");
+        socket.on("chat message", msg => {
+            console.log(msg);
+            io.emit("chat message", msg);
+        })
+    });
 };
