@@ -1,16 +1,13 @@
 const router = require("express").Router();
 //const { catchErrors } = require("../handlers/errorHandlers");
-const chatroomController = require("../controllers/chatroomController");
+const chatgroupController = require("../controllers/groupChatsController");
 
 //const auth = require("../middlewares/auth");
 
 //router.post("/", auth, catchErrors(chatroomController.createChatroom));
 
-router.get("/", chatroomController.getAllChatrooms)
-router.post("/", chatroomController.createChatroom)
-
-
-module.exports = router;
+router.get("/", chatgroupController.getAllGroupChats)
+router.post("/", chatgroupController.createGroupChat)
 
 
 module.exports = router;

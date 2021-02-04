@@ -21,11 +21,11 @@ app.use(require("cors")());
 
 //middleware
 const userRouter = require('./routes/user')
-const chatRouter = require('./routes/chatroom')
+const groupsRouter = require('./routes/groups')
 
 //Bring in the routes
 app.use('/user', userRouter);
-app.use("/chatroom", chatRouter);
+app.use('/groups', groupsRouter);
 
 app.get('/', (req, res) => {
     res.send('connected')
