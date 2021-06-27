@@ -7,6 +7,6 @@ router.get("/getallusers", userController.getallusers)
 router.post("/fetchuser", userController.fetchuser)
 router.post("/checkusername", userController.checkusername)
 
-
+    
 
 module.exports = router;

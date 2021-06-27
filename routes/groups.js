@@ -6,8 +6,8 @@ const chatgroupController = require("../controllers/groupChatsController");
 
 //router.post("/", auth, catchErrors(chatroomController.createChatroom));
 
-router.get("/", chatgroupController.getAllGroupChats)
-router.post("/", chatgroupController.createGroupChat)
+router.get("/getall", chatgroupController.getAllGroupChats)
+router.post("/create", chatgroupController.createGroupChat)
 
 
 module.exports = router;

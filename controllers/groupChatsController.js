@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Groupchat = mongoose.model("Groupchat");
 
 exports.createGroupChat = async (req, res) => {
-  const { groupname, grouptype, groupadmin } = req.body;
+  const { groupname, grouptype, groupadmin, userid } = req.body;
 
   const chatroomExists = await Groupchat.findOne({ groupname });
 
@@ -12,12 +12,13 @@ exports.createGroupChat = async (req, res) => {
     groupname,
     grouptype,
     groupadmin,
+    userid,
   });
 
   await groupchat.save();
 
   res.json({
-    message: "Chatroom created!",
+    message: "Group created!",
   });
 };
 
